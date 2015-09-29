@@ -177,7 +177,7 @@ function GetChaptersUrl() {
             if (end > 0) {
                 var url = content.substr(start + 6, end - start - 6);
                 if (url) {
-                    url = "http://readmanga.me" + url + '?mature=1';
+                    url = "http://adultmanga.ru" + url + '?mature=1';
                     var nameStart = content.indexOf(">", end);
                     var name = "";
                     if (nameStart) {

@@ -539,6 +539,21 @@
 		<key>WebName</key>
 		<string>http://readmanga.me</string>
 	</dict>
+	<key>adultmangaImagesUrlDic</key>
+	<dict>
+		<key>ChapterAsc</key>
+		<string>1</string>
+		<key>HowToGetImageUrl</key>
+		<string>0</string>
+		<key>Key1</key>
+		<string>var pictures =</string>
+		<key>Key2</key>
+		<string>url:"</string>
+		<key>Key3</key>
+		<string>"</string>
+		<key>WebName</key>
+		<string>http://adultmanga.ru</string>
+	</dict>
 	<key>tenmangaImagesUrlDic</key>
 	<dict>
 		<key>ChapterAsc</key>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>EdenSignal</key>
+	<array>
+		<string>mangaeden</string>
+		<string>Chapter name</string>
+		<string>Rating</string>
+	</array>
+	<key>FoxSignal</key>
+	<array>
+		<string>mangafox</string>
+		<string>Rank:</string>
+		<string>Released:</string>
+	</array>
+	<key>OtherSignal</key>
+	<array>
+		<string>Plot:</string>
+		<string>Discussion:</string>
+		<string>Chapter</string>
+		<string>mangahere</string>
+		<string>Genre(s):</string>
+		<string>Status:</string>
+		<string>Author:</string>
+		<string>Artist:</string>
+		<string>Categories:</string>
+		<string>mangavolume</string>
+		<string>Created by</string>
+		<string>MainList</string>
+		<string>Categories:</string>
+		<string>Status:</string>
+		<string>Series Brief Review</string>
+		<string>batoto</string>
+		<string>Author:</string>
+		<string>Latest Forum Posts</string>
+		<string>Информация о манге</string>
+		<string>Томов:</string>
+		<string>Жанры:</string>
+		<string>tenmanga</string>
+		<string>Chapter Name</string>
+		<string>Summary</string>
+		<string>mangainn</string>
+		<string>Author(s)</string>
+		<string>Genre(s)</string>
+		<string>meinmanga</string>
+		<string>Autor</string>
+		<string>Kapitelname</string>
+	</array>
+	<key>ReaderSignal</key>
+	<array>
+		<string>mangareader</string>
+		<string>Alternate Name</string>
+		<string>Chapter Name</string>
+	</array>
+	<key>Version</key>
+	<string>1</string>
+</dict>
+</plist>

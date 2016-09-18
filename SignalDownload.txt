@@ -526,28 +526,20 @@
 	</dict>
 	<key>readmangaImagesUrlDic</key>
 	<dict>
+		<key>ChapterAsc</key>
+		<string>1</string>
+		<key>HowToGetImageUrl</key>
+		<string>0</string>
 		<key>Key1</key>
-		<string>pages-count"&gt;</string>
+		<string>var pictures =</string>
 		<key>Key2</key>
-		<string>&lt;/select&gt;</string>
+		<string>url:"</string>
 		<key>Key3</key>
-		<string>id="fotocontext"</string>
-		<key>Key4</key>
-		<string>src="</string>
-		<key>Key5</key>
 		<string>"</string>
-		<key>Key6</key>
-		<string>page-selector form-control</string>
-		<key>Key7</key>
-		<string>&lt;option value="</string>
-		<key>Key8</key>
-		<string>"</string>
-		<key>Key9</key>
-		<string>http://readmanga.me/2001_nights/vol1/1#page=</string>
 		<key>WebName</key>
 		<string>http://readmanga.me</string>
 	</dict>
-	<key>mintmangaImagesUrlDic</key>
+	<key>adultmangaImagesUrlDic</key>
 	<dict>
 		<key>ChapterAsc</key>
 		<string>1</string>
@@ -560,7 +552,7 @@
 		<key>Key3</key>
 		<string>"</string>
 		<key>WebName</key>
-		<string>http://mintmanga.com</string>
+		<string>http://adultmanga.ru</string>
 	</dict>
 	<key>tenmangaImagesUrlDic</key>
 	<dict>

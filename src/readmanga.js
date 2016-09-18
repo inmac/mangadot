@@ -83,7 +83,7 @@ function GetStatus() {
             if (end > 0) {
                 var status = content.substr(start + 4, end - start - 4);
                 if (status) {
-                    return status;
+                    return status.trim();
                 }
             }
         }
@@ -125,13 +125,14 @@ function GetDescription() {
     var content = document.documentElement.innerHTML;
     var firstSymbol = content.indexOf("manga-description", 0);
     if (firstSymbol > 0) {
-        var start = content.indexOf("<p", firstSymbol);
+        var start = content.indexOf(">", firstSymbol);
         if (start > 0) {
-            var end = content.indexOf("</p>", start);
+        	start += 1;
+            var end = content.indexOf("<div", start);
             if (end > 0) {
-                var des = content.substr(start, end - start + 4);
+                var des = content.substr(start, end - start);
                 if (des) {
-                    return CleanupTag(des, "span").replace(/[ ]{2,}/g, ' ');
+                    return CleanupTag(des, "span").replace(/[ ]{2,}/g, ' ').trim();
                 }
             }
         }

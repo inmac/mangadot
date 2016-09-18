@@ -52,6 +52,7 @@
 		<string>mangareader</string>
 		<string>Alternate Name</string>
 		<string>Chapter Name</string>
+		<string>reader-bottom</string>
 	</array>
 	<key>Version</key>
 	<string>1</string>

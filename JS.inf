@@ -129,7 +129,7 @@ function GetStatus() {
             if (end &gt; 0) {
                 var status = content.substr(start + 4, end - start - 4);
                 if (status) {
-                    return status;
+                    return status.trim();
                 }
             }
         }
@@ -171,13 +171,14 @@ function GetDescription() {
     var content = document.documentElement.innerHTML;
     var firstSymbol = content.indexOf(&quot;manga-description&quot;, 0);
     if (firstSymbol &gt; 0) {
-        var start = content.indexOf(&quot;&lt;p&quot;, firstSymbol);
+        var start = content.indexOf(&quot;&gt;&quot;, firstSymbol);
         if (start &gt; 0) {
-            var end = content.indexOf(&quot;&lt;/p&gt;&quot;, start);
+        	start += 1;
+            var end = content.indexOf(&quot;&lt;div&quot;, start);
             if (end &gt; 0) {
-                var des = content.substr(start, end - start + 4);
+                var des = content.substr(start, end - start);
                 if (des) {
-                    return CleanupTag(des, &quot;span&quot;).replace(/[ ]{2,}/g, &apos; &apos;);
+                    return CleanupTag(des, &quot;span&quot;).replace(/[ ]{2,}/g, &apos; &apos;).trim();
                 }
             }
         }
@@ -333,7 +334,7 @@ function GetStatus() {
             if (end &gt; 0) {
                 var status = content.substr(start + 4, end - start - 4);
                 if (status) {
-                    return status;
+                    return status.trim();;
                 }
             }
         }
@@ -375,13 +376,14 @@ function GetDescription() {
     var content = document.documentElement.innerHTML;
     var firstSymbol = content.indexOf(&quot;manga-description&quot;, 0);
     if (firstSymbol &gt; 0) {
-        var start = content.indexOf(&quot;&lt;p&quot;, firstSymbol);
+        var start = content.indexOf(&quot;&gt;&quot;, firstSymbol);
         if (start &gt; 0) {
-            var end = content.indexOf(&quot;&lt;/p&gt;&quot;, start);
+        	start += 1;
+            var end = content.indexOf(&quot;&lt;div&quot;, start);
             if (end &gt; 0) {
-                var des = content.substr(start, end - start + 4);
+                var des = content.substr(start, end - start);
                 if (des) {
-                    return CleanupTag(des, &quot;span&quot;).replace(/[ ]{2,}/g, &apos; &apos;);
+                    return CleanupTag(des, &quot;span&quot;).replace(/[ ]{2,}/g, &apos; &apos;).trim();
                 }
             }
         }
@@ -427,7 +429,7 @@ function GetChaptersUrl() {
             if (end &gt; 0) {
                 var url = content.substr(start + 6, end - start - 6);
                 if (url) {
-                    url = &quot;http://adultmanga.ru&quot; + url + &apos;?mature=1&apos;;
+                    url = &quot;http://mintmanga.com&quot; + url + &apos;?mature=1&apos;;
                     var nameStart = content.indexOf(&quot;&gt;&quot;, end);
                     var name = &quot;&quot;;
                     if (nameStart) {
@@ -448,7 +450,7 @@ function GetChaptersUrl() {
     return &quot;Unknown&quot;;
 }</string>
 			<key>WebName</key>
-			<string>http://adultmanga.ru</string>
+			<string>http://mintmanga.com</string>
 		</dict>
 		<dict>
 			<key>JS</key>

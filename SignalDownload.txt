@@ -539,7 +539,7 @@
 		<key>WebName</key>
 		<string>http://readmanga.me</string>
 	</dict>
-	<key>adultmangaImagesUrlDic</key>
+	<key>mintmangaImagesUrlDic</key>
 	<dict>
 		<key>ChapterAsc</key>
 		<string>1</string>
@@ -552,7 +552,7 @@
 		<key>Key3</key>
 		<string>"</string>
 		<key>WebName</key>
-		<string>http://adultmanga.ru</string>
+		<string>http://mintmanga.com</string>
 	</dict>
 	<key>tenmangaImagesUrlDic</key>
 	<dict>

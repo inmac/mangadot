@@ -46,6 +46,7 @@
 		<string>meinmanga</string>
 		<string>Autor</string>
 		<string>Kapitelname</string>
+		<string>manga-actions</string>
 	</array>
 	<key>ReaderSignal</key>
 	<array>

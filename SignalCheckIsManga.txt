@@ -35,8 +35,8 @@
 		<string>Author:</string>
 		<string>Latest Forum Posts</string>
 		<string>Информация о манге</string>
-		<string>Томов:</string>
-		<string>Жанры:</string>
+		<string>Томов</string>
+		<string>Жанры</string>
 		<string>tenmanga</string>
 		<string>Chapter Name</string>
 		<string>Summary</string>
@@ -46,7 +46,6 @@
 		<string>meinmanga</string>
 		<string>Autor</string>
 		<string>Kapitelname</string>
-		<string>manga-actions</string>
 	</array>
 	<key>ReaderSignal</key>
 	<array>

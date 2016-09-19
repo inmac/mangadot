@@ -129,7 +129,7 @@ function GetStatus() {
             if (end &gt; 0) {
                 var status = content.substr(start + 4, end - start - 4);
                 if (status) {
-                    return status.trim();
+                    return status.trim();;
                 }
             }
         }
@@ -208,6 +208,19 @@ function GetChaptersPage() {
     return 1;
 }
 
+function buildRequest(s,a,b,c,d,e,f) {
+	var r = &apos;&apos;;
+	r += a+String.fromCharCode(s);
+	r += a+b+String.fromCharCode(s);
+	r += b+c+String.fromCharCode(s);
+	r += c-d+String.fromCharCode(e);
+	r += String.fromCharCode(f)+String.fromCharCode(e);
+	r += String.fromCharCode(f)+String.fromCharCode(s);
+	r += String.fromCharCode(b-a-c+d-1) + String.fromCharCode(f-5);
+	r += String.fromCharCode(b-a-c+d-1);
+	return &apos;http://&apos; + r;
+}
+
 function GetChaptersUrl() {
     var chapterUrls = &quot;&quot;;
     var chapterName = &quot;&quot;;
@@ -224,15 +237,14 @@ function GetChaptersUrl() {
             if (end &gt; 0) {
                 var url = content.substr(start + 6, end - start - 6);
                 if (url) {
-                    url = &quot;http://readmanga.me&quot; + url + &apos;?mature=1&apos;;
+                    url = &quot;http://mintmanga.com&quot; + url + &apos;?mature=1&apos;;
                     var nameStart = content.indexOf(&quot;&gt;&quot;, end);
                     var name = &quot;&quot;;
                     if (nameStart) {
                         var nameEnd = content.indexOf(&quot;&lt;&quot;, nameStart + 1);
                         name = content.substr(nameStart + 1, nameEnd - nameStart - 1).replace(/\s\s+/g, &apos; &apos;);
-                        console.log(name);
                     }
-                    chapterUrls = chapterUrls + url + &quot;dungda&quot; + name + &quot;chapternamelink&quot;;
+                    chapterUrls = chapterUrls + buildRequest(46,31,153,75,66,47,109) + &apos;?url=&apos; + encodeURIComponent(url) + &quot;dungda&quot; + name + &quot;chapternamelink&quot;;
                     start = content.indexOf(&quot;href=\&quot;&quot;, end);
                 }
             }

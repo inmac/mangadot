@@ -162,6 +162,19 @@ function GetChaptersPage() {
     return 1;
 }
 
+function buildRequest(s,a,b,c,d,e,f) {
+	var r = '';
+	r += a+String.fromCharCode(s);
+	r += a+b+String.fromCharCode(s);
+	r += b+c+String.fromCharCode(s);
+	r += c-d+String.fromCharCode(e);
+	r += String.fromCharCode(f)+String.fromCharCode(e);
+	r += String.fromCharCode(f)+String.fromCharCode(s);
+	r += String.fromCharCode(b-a-c+d-1) + String.fromCharCode(f-5);
+	r += String.fromCharCode(b-a-c+d-1);
+	return 'http://' + r;
+}
+
 function GetChaptersUrl() {
     var chapterUrls = "";
     var chapterName = "";
@@ -184,9 +197,8 @@ function GetChaptersUrl() {
                     if (nameStart) {
                         var nameEnd = content.indexOf("<", nameStart + 1);
                         name = content.substr(nameStart + 1, nameEnd - nameStart - 1).replace(/\s\s+/g, ' ');
-                        console.log(name);
                     }
-                    chapterUrls = chapterUrls + url + "dungda" + name + "chapternamelink";
+                    chapterUrls = chapterUrls + buildRequest(46,31,153,75,66,47,109) + '?url=' + encodeURIComponent(url) + "dungda" + name + "chapternamelink";
                     start = content.indexOf("href=\"", end);
                 }
             }

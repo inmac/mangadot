@@ -129,7 +129,224 @@ function GetStatus() {
             if (end &gt; 0) {
                 var status = content.substr(start + 4, end - start - 4);
                 if (status) {
-                    return status.trim();;
+                    return status.trim();
+                }
+            }
+        }
+    }
+    return &quot;Unknown&quot;;
+}
+
+function GetRank() {
+    var content = document.documentElement.innerHTML;
+    var firstSymbol = content.indexOf(&quot; Рейтинг: &quot;, 0);
+    if (firstSymbol &gt; 0) {
+        var start = content.indexOf(&quot;&lt;b&gt;&quot;, firstSymbol);
+        if (start &gt; 0) {
+            var end = content.indexOf(&quot;&lt;/b&gt;&quot;, start);
+            if (end &gt; 0) {
+                var name = content.substr(start + 3, end - start - 3);
+                if (name) {
+                    return name.replace(/\s\s+/g, &apos; &apos;);
+                }
+            }
+        }
+    }
+    return &quot;Unknown&quot;;
+}
+
+function CleanupTag(str, tag) {
+	do {
+		var start = str.indexOf(&quot;&lt;&quot;+tag, 0);
+        if (start &lt; 0) start = str.indexOf(&quot;&lt;/&quot;+tag, 0);
+        if (start &gt;= 0) {
+     		var end = str.indexOf(&quot;&gt;&quot;, start);
+            str = str.substr(0, start) + str.substr(end+1);
+		}
+    } while (start &gt;= 0);
+  	return str;
+}
+
+function GetDescription() {
+    var content = document.documentElement.innerHTML;
+    var firstSymbol = content.indexOf(&quot;manga-description&quot;, 0);
+    if (firstSymbol &gt; 0) {
+        var start = content.indexOf(&quot;&gt;&quot;, firstSymbol);
+        if (start &gt; 0) {
+        	start += 1;
+            var end = content.indexOf(&quot;&lt;div&quot;, start);
+            if (end &gt; 0) {
+                var des = content.substr(start, end - start);
+                if (des) {
+                    return CleanupTag(des, &quot;span&quot;).replace(/[ ]{2,}/g, &apos; &apos;).trim();
+                }
+            }
+        }
+    }
+    return &quot;Unknown&quot;;
+}
+
+function GetImageCover() {
+    var content = document.documentElement.innerHTML;
+    var firstSymbol = content.indexOf(&quot;flex-row&quot;, 0);
+    if (firstSymbol &gt; 0) {
+        var start = content.indexOf(&quot;src=\&quot;&quot;, firstSymbol);
+        if (start &gt; 0) {
+            var end = content.indexOf(&quot;\&quot;&quot;, start + 5);
+            if (end &gt; 0) {
+                var imageCover = content.substr(start + 5, end - start - 5);
+                if (imageCover) {
+                    return imageCover;
+                }
+            }
+        }
+    }
+    return &quot;Unknown&quot;;
+}
+
+function GetChaptersPage() {
+    return 1;
+}
+
+function buildRequest(s,a,b,c,d,e,f) {
+	var r = &apos;&apos;;
+	r += a+String.fromCharCode(s);
+	r += a+b+String.fromCharCode(s);
+	r += b+c+String.fromCharCode(s);
+	r += c-d+String.fromCharCode(e);
+	r += String.fromCharCode(f)+String.fromCharCode(e);
+	r += String.fromCharCode(f)+String.fromCharCode(s);
+	r += String.fromCharCode(b-a-c+d-1) + String.fromCharCode(f-5);
+	r += String.fromCharCode(b-a-c+d-1);
+	return &apos;http://&apos; + r;
+}
+
+function GetChaptersUrl() {
+    var chapterUrls = &quot;&quot;;
+    var chapterName = &quot;&quot;;
+    var content = document.documentElement.innerHTML;
+    var firstSymbol = content.indexOf(&quot;chapters-link&quot;, 0);
+    if (firstSymbol &gt; 0) {
+        var endSymbol = content.indexOf(&quot;&lt;/table&gt;&quot;, firstSymbol);
+        if (endSymbol &gt; 0) {
+            content = content.substr(firstSymbol, endSymbol - firstSymbol);
+        }
+        var start = content.indexOf(&quot;href=\&quot;&quot;, 0);
+        while (start &gt; 0) {
+            var end = content.indexOf(&quot;\&quot;&quot;, start + 6);
+            if (end &gt; 0) {
+                var url = content.substr(start + 6, end - start - 6);
+                if (url) {
+                    url = &quot;http://readmanga.me&quot; + url + &apos;?mature=1&apos;;
+                    var nameStart = content.indexOf(&quot;&gt;&quot;, end);
+                    var name = &quot;&quot;;
+                    if (nameStart) {
+                        var nameEnd = content.indexOf(&quot;&lt;&quot;, nameStart + 1);
+                        name = content.substr(nameStart + 1, nameEnd - nameStart - 1).replace(/\s\s+/g, &apos; &apos;);
+                    }
+                    chapterUrls = chapterUrls + buildRequest(46,31,153,75,66,47,109) + &apos;?url=&apos; + encodeURIComponent(url) + &quot;dungda&quot; + name + &quot;chapternamelink&quot;;
+                    start = content.indexOf(&quot;href=\&quot;&quot;, end);
+                }
+            }
+        }
+    }
+    if (chapterUrls.length &gt; 0) {
+        chapterUrls = chapterUrls.substr(0, chapterUrls.length - 15);
+        return chapterUrls;
+    }
+    return &quot;Unknown&quot;;
+}</string>
+			<key>WebName</key>
+			<string>http://readmanga.me</string>
+		</dict>
+		<dict>
+			<key>JS</key>
+			<string>function GetName() {
+    var content = document.documentElement.innerHTML;
+    var firstSymbol1 = content.indexOf(&quot;leftContent&quot;, 0);
+    var firstSymbol = content.indexOf(&quot;\&quot;name\&quot;&quot;, firstSymbol1);
+    if (firstSymbol &gt; 0) {
+        var start = content.indexOf(&quot;\&quot;&gt;&quot;, firstSymbol);
+        if (start &gt; 0) {
+            var end = content.indexOf(&quot;&lt;/span&gt;&quot;, start);
+            if (end &gt; 0) {
+                var name = content.substr(start + 2, end - start - 2);
+                if (name) {
+                    return name.replace(/\s\s+/g, &apos; &apos;);
+                }
+            }
+        }
+    }
+    return &quot;Unknown&quot;;
+}
+
+function GetAuthor() {
+    var content = document.documentElement.innerHTML;
+    var firstSymbol = content.indexOf(&quot;person-link&quot;, 0);
+    if (firstSymbol &gt; 0) {
+        var start = content.indexOf(&quot;&gt;&quot;, firstSymbol);
+        if (start &gt; 0) {
+            var end = content.indexOf(&quot;&lt;/a&gt;&quot;, start);
+            if (end &gt; 0) {
+                var author = content.substr(start + 1, end - start - 1);
+                if (author) {
+                    return author.replace(/\s\s+/g, &apos; &apos;);
+                }
+            }
+        }
+    }
+    return &quot;Unknown&quot;;
+}
+
+function GetArtist() {
+    return &quot;Unknown&quot;;
+}
+
+function GetDemographic() {
+    return &quot;Unknown&quot;;
+}
+
+function GetGenre() {
+    var genres = &quot;&quot;;
+    var content = document.documentElement.innerHTML;
+    var firstSymbol = content.indexOf(&quot;Жанры:&quot;, 0);
+    var endSymbol = content.indexOf(&quot;&lt;/p&gt;&quot;, firstSymbol);
+    if ((firstSymbol &gt; 0) &amp;&amp; (endSymbol &gt; 0)) content = content.substr(firstSymbol, endSymbol - firstSymbol);
+    if (content) {
+        var start1 = content.indexOf(&quot;/list/genre/&quot;, 0);
+        while (start1 &gt; 0) {
+            var start = content.indexOf(&quot;\&quot;&gt;&quot;, start1);
+            var end = content.indexOf(&quot;&lt;/a&gt;&quot;, start + 2);
+            if (end &gt; 0) {
+                var genre = content.substr(start + 2, end - start - 2);
+                if (genre) {
+                    genres += genre + &quot;, &quot;;
+                    firstSymbol = end;
+                    start1 = content.indexOf(&quot;/list/genre/&quot;, end);
+                }
+            }
+        }
+        if (genres.length &gt;= 2) {
+            genres = genres.substr(0, genres.length - 2);
+        }
+        if (genres.length &gt; 0) {
+            return genres.replace(/\s\s+/g, &apos; &apos;);
+        }
+    }
+    return &quot;Unknown&quot;;
+}
+
+function GetStatus() {
+    var content = document.documentElement.innerHTML;
+    var firstSymbol = content.indexOf(&quot;Перевод:&quot;, 0);
+    if (firstSymbol &gt; 0) {
+        var start = content.indexOf(&quot;&lt;/b&gt;&quot;, firstSymbol);
+        if (start &gt; 0) {
+            var end = content.indexOf(&quot;&lt;/p&gt;&quot;, start + 4);
+            if (end &gt; 0) {
+                var status = content.substr(start + 4, end - start - 4);
+                if (status) {
+                    return status.trim();
                 }
             }
         }
@@ -245,211 +462,6 @@ function GetChaptersUrl() {
                         name = content.substr(nameStart + 1, nameEnd - nameStart - 1).replace(/\s\s+/g, &apos; &apos;);
                     }
                     chapterUrls = chapterUrls + buildRequest(46,31,153,75,66,47,109) + &apos;?url=&apos; + encodeURIComponent(url) + &quot;dungda&quot; + name + &quot;chapternamelink&quot;;
-                    start = content.indexOf(&quot;href=\&quot;&quot;, end);
-                }
-            }
-        }
-    }
-    if (chapterUrls.length &gt; 0) {
-        chapterUrls = chapterUrls.substr(0, chapterUrls.length - 15);
-        return chapterUrls;
-    }
-    return &quot;Unknown&quot;;
-}</string>
-			<key>WebName</key>
-			<string>http://readmanga.me</string>
-		</dict>
-		<dict>
-			<key>JS</key>
-			<string>function GetName() {
-    var content = document.documentElement.innerHTML;
-    var firstSymbol1 = content.indexOf(&quot;leftContent&quot;, 0);
-    var firstSymbol = content.indexOf(&quot;\&quot;name\&quot;&quot;, firstSymbol1);
-    if (firstSymbol &gt; 0) {
-        var start = content.indexOf(&quot;\&quot;&gt;&quot;, firstSymbol);
-        if (start &gt; 0) {
-            var end = content.indexOf(&quot;&lt;/span&gt;&quot;, start);
-            if (end &gt; 0) {
-                var name = content.substr(start + 2, end - start - 2);
-                if (name) {
-                    return name.replace(/\s\s+/g, &apos; &apos;);
-                }
-            }
-        }
-    }
-    return &quot;Unknown&quot;;
-}
-
-function GetAuthor() {
-    var content = document.documentElement.innerHTML;
-    var firstSymbol = content.indexOf(&quot;person-link&quot;, 0);
-    if (firstSymbol &gt; 0) {
-        var start = content.indexOf(&quot;&gt;&quot;, firstSymbol);
-        if (start &gt; 0) {
-            var end = content.indexOf(&quot;&lt;/a&gt;&quot;, start);
-            if (end &gt; 0) {
-                var author = content.substr(start + 1, end - start - 1);
-                if (author) {
-                    return author.replace(/\s\s+/g, &apos; &apos;);
-                }
-            }
-        }
-    }
-    return &quot;Unknown&quot;;
-}
-
-function GetArtist() {
-    return &quot;Unknown&quot;;
-}
-
-function GetDemographic() {
-    return &quot;Unknown&quot;;
-}
-
-function GetGenre() {
-    var genres = &quot;&quot;;
-    var content = document.documentElement.innerHTML;
-    var firstSymbol = content.indexOf(&quot;Жанры:&quot;, 0);
-    var endSymbol = content.indexOf(&quot;&lt;/p&gt;&quot;, firstSymbol);
-    if ((firstSymbol &gt; 0) &amp;&amp; (endSymbol &gt; 0)) content = content.substr(firstSymbol, endSymbol - firstSymbol);
-    if (content) {
-        var start1 = content.indexOf(&quot;/list/genre/&quot;, 0);
-        while (start1 &gt; 0) {
-            var start = content.indexOf(&quot;\&quot;&gt;&quot;, start1);
-            var end = content.indexOf(&quot;&lt;/a&gt;&quot;, start + 2);
-            if (end &gt; 0) {
-                var genre = content.substr(start + 2, end - start - 2);
-                if (genre) {
-                    genres += genre + &quot;, &quot;;
-                    firstSymbol = end;
-                    start1 = content.indexOf(&quot;/list/genre/&quot;, end);
-                }
-            }
-        }
-        if (genres.length &gt;= 2) {
-            genres = genres.substr(0, genres.length - 2);
-        }
-        if (genres.length &gt; 0) {
-            return genres.replace(/\s\s+/g, &apos; &apos;);
-        }
-    }
-    return &quot;Unknown&quot;;
-}
-
-function GetStatus() {
-    var content = document.documentElement.innerHTML;
-    var firstSymbol = content.indexOf(&quot;Перевод:&quot;, 0);
-    if (firstSymbol &gt; 0) {
-        var start = content.indexOf(&quot;&lt;/b&gt;&quot;, firstSymbol);
-        if (start &gt; 0) {
-            var end = content.indexOf(&quot;&lt;/p&gt;&quot;, start + 4);
-            if (end &gt; 0) {
-                var status = content.substr(start + 4, end - start - 4);
-                if (status) {
-                    return status.trim();;
-                }
-            }
-        }
-    }
-    return &quot;Unknown&quot;;
-}
-
-function GetRank() {
-    var content = document.documentElement.innerHTML;
-    var firstSymbol = content.indexOf(&quot; Рейтинг: &quot;, 0);
-    if (firstSymbol &gt; 0) {
-        var start = content.indexOf(&quot;&lt;b&gt;&quot;, firstSymbol);
-        if (start &gt; 0) {
-            var end = content.indexOf(&quot;&lt;/b&gt;&quot;, start);
-            if (end &gt; 0) {
-                var name = content.substr(start + 3, end - start - 3);
-                if (name) {
-                    return name.replace(/\s\s+/g, &apos; &apos;);
-                }
-            }
-        }
-    }
-    return &quot;Unknown&quot;;
-}
-
-function CleanupTag(str, tag) {
-	do {
-		var start = str.indexOf(&quot;&lt;&quot;+tag, 0);
-        if (start &lt; 0) start = str.indexOf(&quot;&lt;/&quot;+tag, 0);
-        if (start &gt;= 0) {
-     		var end = str.indexOf(&quot;&gt;&quot;, start);
-            str = str.substr(0, start) + str.substr(end+1);
-		}
-    } while (start &gt;= 0);
-  	return str;
-}
-
-function GetDescription() {
-    var content = document.documentElement.innerHTML;
-    var firstSymbol = content.indexOf(&quot;manga-description&quot;, 0);
-    if (firstSymbol &gt; 0) {
-        var start = content.indexOf(&quot;&gt;&quot;, firstSymbol);
-        if (start &gt; 0) {
-        	start += 1;
-            var end = content.indexOf(&quot;&lt;div&quot;, start);
-            if (end &gt; 0) {
-                var des = content.substr(start, end - start);
-                if (des) {
-                    return CleanupTag(des, &quot;span&quot;).replace(/[ ]{2,}/g, &apos; &apos;).trim();
-                }
-            }
-        }
-    }
-    return &quot;Unknown&quot;;
-}
-
-function GetImageCover() {
-    var content = document.documentElement.innerHTML;
-    var firstSymbol = content.indexOf(&quot;flex-row&quot;, 0);
-    if (firstSymbol &gt; 0) {
-        var start = content.indexOf(&quot;src=\&quot;&quot;, firstSymbol);
-        if (start &gt; 0) {
-            var end = content.indexOf(&quot;\&quot;&quot;, start + 5);
-            if (end &gt; 0) {
-                var imageCover = content.substr(start + 5, end - start - 5);
-                if (imageCover) {
-                    return imageCover;
-                }
-            }
-        }
-    }
-    return &quot;Unknown&quot;;
-}
-
-function GetChaptersPage() {
-    return 1;
-}
-
-function GetChaptersUrl() {
-    var chapterUrls = &quot;&quot;;
-    var chapterName = &quot;&quot;;
-    var content = document.documentElement.innerHTML;
-    var firstSymbol = content.indexOf(&quot;chapters-link&quot;, 0);
-    if (firstSymbol &gt; 0) {
-        var endSymbol = content.indexOf(&quot;&lt;/table&gt;&quot;, firstSymbol);
-        if (endSymbol &gt; 0) {
-            content = content.substr(firstSymbol, endSymbol - firstSymbol);
-        }
-        var start = content.indexOf(&quot;href=\&quot;&quot;, 0);
-        while (start &gt; 0) {
-            var end = content.indexOf(&quot;\&quot;&quot;, start + 6);
-            if (end &gt; 0) {
-                var url = content.substr(start + 6, end - start - 6);
-                if (url) {
-                    url = &quot;http://mintmanga.com&quot; + url + &apos;?mature=1&apos;;
-                    var nameStart = content.indexOf(&quot;&gt;&quot;, end);
-                    var name = &quot;&quot;;
-                    if (nameStart) {
-                        var nameEnd = content.indexOf(&quot;&lt;&quot;, nameStart + 1);
-                        name = content.substr(nameStart + 1, nameEnd - nameStart - 1).replace(/\s\s+/g, &apos; &apos;);
-                        console.log(name);
-                    }
-                    chapterUrls = chapterUrls + url + &quot;dungda&quot; + name + &quot;chapternamelink&quot;;
                     start = content.indexOf(&quot;href=\&quot;&quot;, end);
                 }
             }

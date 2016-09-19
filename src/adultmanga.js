@@ -83,7 +83,7 @@ function GetStatus() {
             if (end > 0) {
                 var status = content.substr(start + 4, end - start - 4);
                 if (status) {
-                    return status.trim();;
+                    return status.trim();
                 }
             }
         }
